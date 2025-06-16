@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   addContact,
@@ -12,6 +12,8 @@ function AddContact() {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
+
+  const fileInputRef = useRef(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -98,6 +100,7 @@ function AddContact() {
         </div>
         <input
           id="avatarUpload"
+          ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={(e) => {
@@ -109,6 +112,9 @@ function AddContact() {
                   ...prevForm,
                   avatar: reader.result,
                 }));
+                if (fileInputRef.current) {
+                  fileInputRef.current.value = "";
+                }
               };
               reader.readAsDataURL(file);
             }
@@ -123,6 +129,9 @@ function AddContact() {
               ...prevForm,
               avatar: "",
             }));
+            if (fileInputRef.current) {
+              fileInputRef.current.value = "";
+            }
           }}
           className="hidden"
         >
