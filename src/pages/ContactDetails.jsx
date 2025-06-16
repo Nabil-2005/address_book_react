@@ -43,7 +43,7 @@ function ContactDetails() {
         <img
           src={contact.avatar}
           alt={contact.name}
-          className="w-32 h-32 rounded-full mx-auto mb-4"
+          className="w-32 h-32 rounded-full object-cover mx-auto mb-4"
         />
       ) : (
         <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
